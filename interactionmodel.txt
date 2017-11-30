@@ -1,0 +1,124 @@
+{
+  "languageModel": {
+    "intents": [
+      {
+        "name": "AMAZON.CancelIntent",
+        "samples": []
+      },
+      {
+        "name": "AMAZON.HelpIntent",
+        "samples": []
+      },
+      {
+        "name": "AMAZON.StopIntent",
+        "samples": []
+      },
+      {
+        "name": "CalculateSleepTimeIntent",
+        "samples": [
+          "Calculate Sleep Time",
+          "Calculate my sleep time",
+          "what time should I go to sleep",
+          "what time should I go to bed",
+          "whats a good bed time",
+          "when should i go to sleep",
+          "when should I go to sleep if I wake up at {WakeUpTime}",
+          "when should I go to bed if I wake up at {WakeUpTime}",
+          "what's my bedtime if I wake up at {WakeUpTime}"
+        ],
+        "slots": [
+          {
+            "name": "WakeUpTime",
+            "type": "AMAZON.TIME",
+            "samples": [
+              "I would like to wake up at {WakeUpTime}",
+              "{WakeUpTime}",
+              "I'll wake up at {WakeUpTime}"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "CalculateWakeUpTimeIntent",
+        "samples": [
+          "What time should i wake up",
+          "wake up time",
+          "calculate my wake up time",
+          "calculate wake up time",
+          "whats a good time to wake up",
+          "when should i wake up",
+          "when should I wake up if I go to bed at {SleepTime}",
+          "calculate wake up time if I go to bed at {SleepTime}",
+          "when should I wake up if I go to sleep at {SleepTime}"
+        ],
+        "slots": [
+          {
+            "name": "SleepTime",
+            "type": "AMAZON.TIME",
+            "samples": [
+              "{SleepTime}",
+              "I'm going to bed at {SleepTime}"
+            ]
+          }
+        ]
+      }
+    ],
+    "invocationName": "sleep cycle hacker"
+  },
+  "prompts": [
+    {
+      "id": "Elicit.Intent-CalculateSleepTimeIntent.IntentSlot-WakeUpTime",
+      "variations": [
+        {
+          "type": "PlainText",
+          "value": "What time would you like to wake up?"
+        }
+      ]
+    },
+    {
+      "id": "Elicit.Intent-CalculateWakeUpTimeIntent.IntentSlot-SleepTime",
+      "variations": [
+        {
+          "type": "PlainText",
+          "value": "What time are you going to bed?"
+        }
+      ]
+    }
+  ],
+  "dialog": {
+    "intents": [
+      {
+        "name": "CalculateSleepTimeIntent",
+        "confirmationRequired": false,
+        "prompts": {},
+        "slots": [
+          {
+            "name": "WakeUpTime",
+            "type": "AMAZON.TIME",
+            "elicitationRequired": true,
+            "confirmationRequired": false,
+            "prompts": {
+              "elicitation": "Elicit.Intent-CalculateSleepTimeIntent.IntentSlot-WakeUpTime"
+            }
+          }
+        ]
+      },
+      {
+        "name": "CalculateWakeUpTimeIntent",
+        "confirmationRequired": false,
+        "prompts": {},
+        "slots": [
+          {
+            "name": "SleepTime",
+            "type": "AMAZON.TIME",
+            "elicitationRequired": true,
+            "confirmationRequired": false,
+            "prompts": {
+              "elicitation": "Elicit.Intent-CalculateWakeUpTimeIntent.IntentSlot-SleepTime"
+            }
+          }
+        ]
+      }
+    ]
+  }
+}
